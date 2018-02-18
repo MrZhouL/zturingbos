@@ -1,6 +1,7 @@
 package cn.zturing.bos.action.base;
 
 import cn.zturing.bos.service.UserService;
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by zhoulei on 2018/2/17.
  */
-public abstract class BaseAction {
+public abstract class BaseAction extends ActionSupport{
     //注入service
     protected UserService userService;
 

@@ -38,7 +38,7 @@
 		<property name="mappingDirectoryLocations">
 			<list>
 				<!-- 引用目录，加载目录下所有 hbm 文件 -->
-				<value>classpath:cn/zturing/bos/domain</value>
+				<value>classpath:/hbm</value>
 			</list>
 		</property>
 	</bean>

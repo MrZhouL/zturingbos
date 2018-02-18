@@ -74,7 +74,7 @@ public class UserServiceTest {
     @Test
     public void editpassword() throws Exception {
         UserEntity updateUserPassword = new UserEntity();
-        updateUserPassword.setId(1);
+        updateUserPassword.setId(3);
         updateUserPassword.setPassword("123");
 
         userService.editpassword(updateUserPassword);

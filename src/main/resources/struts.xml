@@ -37,6 +37,8 @@
 				<!--通过root属性返回结果数据-->
 				<param name="root">result</param>
 			</result>
+
+			<result name="addsuccess">/WEB-INF/pages/admin/userlist.jsp</result>
 		</action>
 	</package>
 
