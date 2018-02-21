@@ -47,7 +47,7 @@ input[type="text"], input[type="password"], select, textarea {
     color: #555555;
 }
 .focus, input:focus, select:focus, textarea:focus {
-    outline: 1px solid red;
+    /*outline: 1px solid red;*/
 }
 a:link {
     color: #0000FF;

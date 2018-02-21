@@ -3,8 +3,11 @@ package cn.zturing.bos.action.user;
 import cn.zturing.bos.action.base.BaseAction;
 import cn.zturing.bos.domain.UserEntity;
 import cn.zturing.bos.utils.MD5Utils;
+import cn.zturing.bos.utils.PageRequestBean;
+import cn.zturing.bos.utils.PageResponseBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import org.hibernate.criterion.DetachedCriteria;
 
 /**
  * Created by zhoulei on 2018/2/17.
@@ -42,4 +45,19 @@ public class UserAction extends BaseAction implements ModelDriven<UserEntity>{
         userService.addUser(userEntity);
         return "addsuccess";
     }
+
+    public String pageQuery(){
+        PageRequestBean pageRequestBean = new PageRequestBean();
+        pageRequestBean.setPage(page);
+        pageRequestBean.setRow(rows);
+
+        DetachedCriteria criteria = DetachedCriteria.forClass(UserEntity.class);
+        pageRequestBean.setDetachedCriteria(criteria);
+
+        PageResponseBean responseBean = userService.pageQuery(pageRequestBean);
+        ActionContext.getContext().put("result",responseBean);
+        return "pageQuerySuccess";
+    }
+
+
 }

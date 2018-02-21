@@ -15,23 +15,29 @@
             <column name="password" sql-type="varchar(32)" length="32" not-null="true"/>
         </property>
         <property name="salary">
-            <column name="salary" sql-type="double" precision="-1" not-null="false"/>
+            <column name="salary" sql-type="double" precision="-1" not-null="true"/>
         </property>
         <property name="birthday">
-            <column name="birthday" sql-type="date" not-null="false"/>
+            <column name="birthday" sql-type="date" not-null="true"/>
         </property>
         <property name="gender">
-            <column name="gender" sql-type="varchar(10)" length="10" not-null="false"/>
+            <column name="gender" sql-type="varchar(10)" length="10" not-null="true"/>
         </property>
         <property name="station">
-            <column name="station" sql-type="varchar(40)" length="40" not-null="false"/>
+            <column name="station" sql-type="varchar(40)" length="40" not-null="true"/>
         </property>
         <property name="telephone">
-            <column name="telephone" sql-type="varchar(11)" length="11" not-null="false"/>
+            <column name="telephone" sql-type="varchar(11)" length="11" not-null="true"/>
         </property>
         <property name="remark">
-            <column name="remark" sql-type="varchar(255)" not-null="false"/>
+            <column name="remark" sql-type="varchar(255)" not-null="true"/>
         </property>
+        <set name="bcStandardsById" inverse="true">
+            <key>
+                <column name="user_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.zturing.bos.domain.BcStandardEntity"/>
+        </set>
     </class>
 
     <query name="user.login">

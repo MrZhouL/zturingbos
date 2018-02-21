@@ -1,6 +1,8 @@
 package cn.zturing.bos.service;
 
 import cn.zturing.bos.domain.UserEntity;
+import cn.zturing.bos.utils.PageRequestBean;
+import cn.zturing.bos.utils.PageResponseBean;
 
 import java.util.List;
 
@@ -52,5 +54,10 @@ public interface UserService {
      */
     UserEntity findById(long id);
 
-
+    /**
+     * 分页查询
+     * @param pageRequestBean
+     * @return
+     */
+    PageResponseBean pageQuery(PageRequestBean pageRequestBean);
 }

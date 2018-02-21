@@ -1,5 +1,6 @@
 package cn.zturing.bos.dao;
 
+import cn.zturing.bos.domain.BcStandardEntity;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.io.Serializable;
@@ -55,4 +56,20 @@ public interface GenericDao<T> {
      * @return
      */
     public  List<T> findByNamedQuery(String queryName, Object... values);
+
+    /**
+     * 分页查询
+     * @param detachedCriteria 条件
+     * @param firstResult   起始记录索引
+     * @param maxResults    显示多少条记录
+     * @return
+     */
+    List<BcStandardEntity> pageQuery(DetachedCriteria detachedCriteria,int firstResult,int maxResults);
+
+    /**
+     * 分页查询-查询总记录数
+     * @param criteria
+     * @return
+     */
+    long findTotalCount(DetachedCriteria criteria);
 }

@@ -1,6 +1,8 @@
 package cn.zturing.bos.dao;
 
+import cn.zturing.bos.domain.BcStandardEntity;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.io.Serializable;
@@ -52,5 +54,21 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 
     public List findByNamedQuery(String queryName, Object... values) {
         return this.getHibernateTemplate().findByNamedQuery(queryName,values);
+    }
+
+    @Override
+    public List<BcStandardEntity> pageQuery(DetachedCriteria criteria, int firstResult, int maxResults) {
+        return this.getHibernateTemplate().findByCriteria(criteria,firstResult,maxResults);
+    }
+
+    @Override
+    public long findTotalCount(DetachedCriteria criteria) {
+        //使用QBC投影查询
+        //添加投影效果和sql select count（*） 一样，不加就是 select *
+        criteria.setProjection(Projections.rowCount());
+        //之前因为调用了pagequery方法，所以first和max Results会保存在criteria里，为了防止报错，只取第一条数据
+        List list = this.getHibernateTemplate().findByCriteria(criteria, 0, 1);
+        return (Long)list.get(0);
+
     }
 }

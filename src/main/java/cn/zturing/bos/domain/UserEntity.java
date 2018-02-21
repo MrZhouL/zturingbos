@@ -1,14 +1,13 @@
 package cn.zturing.bos.domain;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Collection;
 
 /**
- * Created by zhoulei on 2018/2/17.
+ * Created by zhoulei on 2018/2/21.
  */
-@Entity
-@Table(name = "user", schema = "test_db", catalog = "")
-public class UserEntity {
+public class UserEntity implements Serializable{
     private long id;
     private String username;
     private String password;
@@ -18,9 +17,8 @@ public class UserEntity {
     private String station;
     private String telephone;
     private String remark;
+    private Collection<BcStandardEntity> bcStandardsById;
 
-    @Id
-    @Column(name = "id", nullable = false)
     public long getId() {
         return id;
     }
@@ -29,8 +27,6 @@ public class UserEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "username", nullable = true, length = 20)
     public String getUsername() {
         return username;
     }
@@ -39,8 +35,6 @@ public class UserEntity {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password", nullable = true, length = 32)
     public String getPassword() {
         return password;
     }
@@ -49,8 +43,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "salary", nullable = true, precision = 0)
     public Double getSalary() {
         return salary;
     }
@@ -59,8 +51,6 @@ public class UserEntity {
         this.salary = salary;
     }
 
-    @Basic
-    @Column(name = "birthday", nullable = true)
     public Date getBirthday() {
         return birthday;
     }
@@ -69,8 +59,6 @@ public class UserEntity {
         this.birthday = birthday;
     }
 
-    @Basic
-    @Column(name = "gender", nullable = true, length = 10)
     public String getGender() {
         return gender;
     }
@@ -79,8 +67,6 @@ public class UserEntity {
         this.gender = gender;
     }
 
-    @Basic
-    @Column(name = "station", nullable = true, length = 40)
     public String getStation() {
         return station;
     }
@@ -89,8 +75,6 @@ public class UserEntity {
         this.station = station;
     }
 
-    @Basic
-    @Column(name = "telephone", nullable = true, length = 11)
     public String getTelephone() {
         return telephone;
     }
@@ -99,8 +83,6 @@ public class UserEntity {
         this.telephone = telephone;
     }
 
-    @Basic
-    @Column(name = "remark", nullable = true, length = 255)
     public String getRemark() {
         return remark;
     }
@@ -143,20 +125,11 @@ public class UserEntity {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salary=" + salary +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                ", station='" + station + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
+    public Collection<BcStandardEntity> getBcStandardsById() {
+        return bcStandardsById;
     }
 
-
+    public void setBcStandardsById(Collection<BcStandardEntity> bcStandardsById) {
+        this.bcStandardsById = bcStandardsById;
+    }
 }

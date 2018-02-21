@@ -1,9 +1,12 @@
 package cn.zturing.bos.service.impl;
 
+import cn.zturing.bos.domain.BcStandardEntity;
 import cn.zturing.bos.domain.UserEntity;
 import cn.zturing.bos.service.UserService;
 import cn.zturing.bos.service.base.BaserService;
 import cn.zturing.bos.utils.MD5Utils;
+import cn.zturing.bos.utils.PageRequestBean;
+import cn.zturing.bos.utils.PageResponseBean;
 
 import java.util.List;
 
@@ -40,5 +43,19 @@ public class UserServiceImpl extends BaserService implements UserService{
     public UserEntity findById(long id) {
         return userDao.findById(id);
     }
+
+    @Override
+    public PageResponseBean pageQuery(PageRequestBean pageRequestBean) {
+        PageResponseBean resoule = new PageResponseBean();
+
+        List<BcStandardEntity> list = userDao.pageQuery(pageRequestBean.getDetachedCriteria(), pageRequestBean.getFirstResult(), pageRequestBean.getRow());
+        long totalCount = userDao.findTotalCount(pageRequestBean.getDetachedCriteria());
+
+        resoule.setRows(list);
+        resoule.setTotal(totalCount);
+
+        return resoule;
+    }
+
 
 }

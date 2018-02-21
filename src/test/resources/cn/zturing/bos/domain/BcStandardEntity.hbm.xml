@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.zturing.bos.domain.BcStandardEntity" table="bc_standard" schema="test_db">
+        <id name="id">
+            <column name="id" sql-type="varchar(32)" length="32"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(30)" length="30" not-null="true"/>
+        </property>
+        <property name="minweight">
+            <column name="minweight" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+        <property name="maxweight">
+            <column name="maxweight" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+        <property name="deltag">
+            <column name="deltag" sql-type="char(1)" length="1" not-null="true"/>
+        </property>
+        <property name="updatetime">
+            <column name="updatetime" sql-type="timestamp"/>
+        </property>
+        <many-to-one name="userByUserId" class="cn.zturing.bos.domain.UserEntity">
+            <column name="user_id" not-null="true"/>
+        </many-to-one>
+        <set name="bcStaffsById" inverse="true">
+            <key>
+                <column name="standard_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.zturing.bos.domain.BcStaffEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -45,7 +45,7 @@
             checkbox : true,
             rowspan : 2
         }, {
-            field : 'name',
+            field : 'username',
             title : '名称',
             width : 80,
             rowspan : 2
@@ -69,7 +69,7 @@
             title : '其他信息',
             colspan : 2
         }, {
-            field : 'phone',
+            field : 'telephone',
             title : '电话',
             width : 800,
             rowspan : 2
@@ -96,7 +96,7 @@
                 pageList: [30,50,100],
                 pagination : true,
                 toolbar : toolbar,
-                url : "json/users.json",
+                url : "${pageContext.request.contextPath}/user_pageQuery.action",
                 idField : 'id',
                 frozenColumns : frozenColumns,
                 columns : columns,

@@ -29,11 +29,7 @@
 				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
 			</props>
 		</property>
-		<!--<property name="mappingLocations">-->
-			<!--<list>-->
-				<!--<value>classpath:cn/zturing/bos/domain/UserEntity.hbm.xml</value>-->
-			<!--</list>-->
-		<!--</property>-->
+
 		<!-- 引用hbm 映射文件 -->
 		<property name="mappingDirectoryLocations">
 			<list>

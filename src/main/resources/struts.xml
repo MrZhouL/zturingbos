@@ -1,54 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-    "http://struts.apache.org/dtds/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<constant name="struts.devMode" value="true" />
-	<constant name="struts.objectFactory" value="spring"></constant>
-	<!--配置国际化-->
-	<constant name="struts.custom.i18n.resources" value="messages"/>
+    <!--<constant name="struts.devMode" value="true"/>-->
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <!--配置国际化-->
+    <constant name="struts.custom.i18n.resources" value="messages"/>
 
-	<package name="needprivilege" extends="json-default">
-		<!--注册拦截器-->
-		<interceptors>
-			<interceptor name="loginInterceptor" class="cn.zturing.bos.interceptor.LoginInterceptor"></interceptor>
-			<!--定义栈-->
-			<interceptor-stack name="loginStack">
-				<interceptor-ref name="defaultStack"></interceptor-ref>
-				<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			</interceptor-stack>
-		</interceptors>
-		<!--将loginStack设置为默认栈-->
-		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
-		<!--设置全局结果集-->
-		<global-results>
-			<result name="login">/login.jsp</result>
-		</global-results>
+    <package name="needprivilege" extends="json-default">
+        <!--注册拦截器-->
+        <interceptors>
+            <interceptor name="loginInterceptor" class="cn.zturing.bos.interceptor.LoginInterceptor"></interceptor>
+            <!--定义栈-->
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <!--将loginStack设置为默认栈-->
+        <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+        <!--设置全局结果集-->
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
 
 
-		<!-- 需要进行权限控制的页面访问 -->
-		<action name="page_*_*">
-			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
-		</action>
+        <!-- 需要进行权限控制的页面访问 -->
+        <action name="page_*_*">
+            <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+        </action>
 
-		<!--用户管理Action-->
-		<action name="user_*" class="userAction" method="{1}">
-			<result name="editpasswordSUCCESS" type="json">
-				<!--通过root属性返回结果数据-->
-				<param name="root">result</param>
-			</result>
+        <!--用户管理Action-->
+        <action name="user_*" class="userAction" method="{1}">
+            <result name="editpasswordSUCCESS" type="json">
+                <!--通过root属性返回结果数据-->
+                <param name="root">result</param>
+            </result>
 
-			<result name="addsuccess">/WEB-INF/pages/admin/userlist.jsp</result>
-		</action>
-	</package>
+            <result name="addsuccess">/WEB-INF/pages/admin/userlist.jsp</result>
+            <result name="pageQuerySuccess" type="json">
+                <param name="root">result</param>
+                <param name="includeProperties">
+                    total,
+                    rows\[\d+\]\.id,
+                    rows\[\d+\]\.username,
+                    rows\[\d+\]\.salary,
+                    rows\[\d+\]\.birthday,
+                    rows\[\d+\]\.gender,
+                    rows\[\d+\]\.station,
+                    rows\[\d+\]\.telephone,
+                </param>
+            </result>
+        </action>
 
-	<!--不需要权限的-->
-	<package name="noprivilege" extends="struts-default">
-		<!--登录功能-->
-		<action name="login" class="loginAction" method="login">
-			<result name="input">/login.jsp</result>
-			<result type="redirect">/index.jsp</result>
-		</action>
-	</package>
+        <!--基础模块-取派标准-->
+        <action name="standard_*" class="StandardAction" method="{1}">
+            <result name="save_success" type="json">
+                <param name="root">result</param>
+            </result>
+
+            <result name="page-query-success" type="json">
+                <param name="root">result</param>
+                <param name="includeProperties">
+                    total,
+                    rows\[\d+\]\.id,
+                    rows\[\d+\]\.name,
+                    rows\[\d+\]\.minweight,
+                    rows\[\d+\]\.maxweight,
+                    rows\[\d+\]\.updatetime,
+                    rows\[\d+\]\.userByUserId\.username,
+                    rows\[\d+\]\.userByUserId\.station
+                </param>
+            </result>
+            <result name="delete-success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+    </package>
+
+    <!--不需要权限的-->
+    <package name="noprivilege" extends="struts-default">
+        <!--登录功能-->
+        <action name="login" class="loginAction" method="login">
+            <result name="input">/login.jsp</result>
+            <result type="redirect">/index.jsp</result>
+        </action>
+    </package>
 
 </struts>
