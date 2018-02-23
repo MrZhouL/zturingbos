@@ -1,6 +1,7 @@
 package cn.zturing.bos.service;
 
 import cn.zturing.bos.domain.BcStandardEntity;
+import cn.zturing.bos.service.base.PageQueryInterface;
 import cn.zturing.bos.utils.PageRequestBean;
 import cn.zturing.bos.utils.PageResponseBean;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by zhoulei on 2018/2/19.
  * 取派标准接口
  */
-public interface StandardService {
+public interface StandardService extends PageQueryInterface{
     void addStandard(BcStandardEntity standardEntity);
 
     void delectStandard(String standardEntity);
@@ -19,10 +20,10 @@ public interface StandardService {
 
     List<BcStandardEntity> getAllStandard();
 
+
     /**
-     * 分页查询
-     * @param pageRequestBean
+     * ajax查询所有正在使用的标准。
      * @return
      */
-    PageResponseBean pageQuery(PageRequestBean pageRequestBean);
+    List<BcStandardEntity> findAllUse();
 }

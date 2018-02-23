@@ -56,8 +56,10 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
         return this.getHibernateTemplate().findByNamedQuery(queryName,values);
     }
 
+
+
     @Override
-    public List<BcStandardEntity> pageQuery(DetachedCriteria criteria, int firstResult, int maxResults) {
+    public List pageQuery(DetachedCriteria criteria, int firstResult, int maxResults) {
         return this.getHibernateTemplate().findByCriteria(criteria,firstResult,maxResults);
     }
 

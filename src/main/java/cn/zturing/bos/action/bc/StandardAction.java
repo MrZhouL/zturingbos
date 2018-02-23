@@ -1,4 +1,4 @@
-package cn.zturing.bos.action.standard;
+package cn.zturing.bos.action.bc;
 
 import cn.zturing.bos.action.base.BaseAction;
 import cn.zturing.bos.domain.BcStandardEntity;
@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 /**
  * Created by zhoulei on 2018/2/19.
@@ -36,15 +38,13 @@ public class StandardAction extends BaseAction implements ModelDriven<BcStandard
     }
 
     public String pageQuery(){
-        PageRequestBean pageRequestBean = new PageRequestBean();
-        pageRequestBean.setPage(page);
-        pageRequestBean.setRow(rows);
+
 
         DetachedCriteria criteria = DetachedCriteria.forClass(BcStandardEntity.class);
         //显示未删除的标准
         criteria.add(Restrictions.eq("deltag","0"));
 
-        pageRequestBean.setDetachedCriteria(criteria);
+        PageRequestBean pageRequestBean = initPageRequestBean(criteria);
 
         PageResponseBean responseBean =  standardService.pageQuery(pageRequestBean);
 
@@ -57,6 +57,12 @@ public class StandardAction extends BaseAction implements ModelDriven<BcStandard
         standardService.delectStandard(ids);
         ActionContext.getContext().put("result","success");
         return "delete-success";
+    }
+
+    public String ajaxNameList(){
+        List<BcStandardEntity> list = standardService.findAllUse();
+        ActionContext.getContext().put("result",list);
+        return "ajax-success";
     }
 
     private String ids;

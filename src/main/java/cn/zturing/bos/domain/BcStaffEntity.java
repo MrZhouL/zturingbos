@@ -6,11 +6,11 @@ import java.util.Collection;
  * Created by zhoulei on 2018/2/21.
  */
 public class BcStaffEntity {
-    private String id;
+    private String id; //id 使用assigned策略
     private String name;
-    private Integer telephone;
-    private String haspda;
-    private String deltag;
+    private String telephone;
+    private String haspda = "0";//是否有pda，默认没有，1有 0 没有
+    private String deltag = "0";// 删除标记 （真实系统，数据不能完全删除 ） ， 1 删除  0 未删除
     private String station;
     private Collection<BcDecidedzoneEntity> bcDecidedzonesById;
     private BcStandardEntity bcStandardByStandardId;
@@ -31,11 +31,11 @@ public class BcStaffEntity {
         this.name = name;
     }
 
-    public Integer getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

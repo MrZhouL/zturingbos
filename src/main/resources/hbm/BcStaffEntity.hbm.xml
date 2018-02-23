@@ -7,12 +7,13 @@
     <class name="cn.zturing.bos.domain.BcStaffEntity" table="bc_staff" schema="test_db">
         <id name="id">
             <column name="id" sql-type="varchar(32)" length="32"/>
+            <generator class="assigned"></generator>
         </id>
         <property name="name">
             <column name="name" sql-type="varchar(20)" length="20" not-null="true"/>
         </property>
         <property name="telephone">
-            <column name="telephone" sql-type="int(11)" not-null="true"/>
+            <column name="telephone" sql-type="char(11)" not-null="true"/>
         </property>
         <property name="haspda">
             <column name="haspda" sql-type="char(1)" length="1" not-null="true"/>

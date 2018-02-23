@@ -76,6 +76,53 @@
             <result name="delete-success" type="json">
                 <param name="root">result</param>
             </result>
+
+            <result name="ajax-success" type="json">
+                <param name="root">result</param>
+                <param name="includeProperties">
+                    <!--list<Standard>-->
+                    \[\d+\]\.id,
+                    \[\d+\]\.name
+                </param>
+            </result>
+        </action>
+        <!--基础模块-取派员设置-->
+        <action name="staff_*" class="staffAction" method="{1}">
+            <result name="save-success" type="json">
+                <param name="root">result</param>
+            </result>
+            <result name="pageQuerySuccess" type="json">
+                <param name="root">pageList</param>
+                <param name="includeProperties">
+                    total,
+                    rows\[\d+\]\.id,
+                    rows\[\d+\]\.name,
+                    rows\[\d+\]\.telephone,
+                    rows\[\d+\]\.haspda,
+                    rows\[\d+\]\.deltag,
+                    rows\[\d+\]\.station,
+                    rows\[\d+\]\.bcStandardByStandardId\.name
+                </param>
+            </result>
+        </action>
+        <!--基础模块-区域设置-->
+        <action name="region_*" class="regionAction" method="{1}">
+            <result name="save-success" type="json">
+                <param name="root">result</param>
+            </result>
+            <result name="pagingQuerySuccess" type="json">
+                <param name="root">result</param>
+                <param name="includeProperties">
+                    total,
+                    rows\[\d+\]\.id,
+                    rows\[\d+\]\.province,
+                    rows\[\d+\]\.city,
+                    rows\[\d+\]\.district,
+                    rows\[\d+\]\.postcode,
+                    rows\[\d+\]\.shortcode,
+                    rows\[\d+\]\.citycode,
+                </param>
+            </result>
         </action>
     </package>
 

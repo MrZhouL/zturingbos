@@ -47,13 +47,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserEntity>{
     }
 
     public String pageQuery(){
-        PageRequestBean pageRequestBean = new PageRequestBean();
-        pageRequestBean.setPage(page);
-        pageRequestBean.setRow(rows);
-
         DetachedCriteria criteria = DetachedCriteria.forClass(UserEntity.class);
-        pageRequestBean.setDetachedCriteria(criteria);
-
+        PageRequestBean pageRequestBean = initPageRequestBean(criteria);
         PageResponseBean responseBean = userService.pageQuery(pageRequestBean);
         ActionContext.getContext().put("result",responseBean);
         return "pageQuerySuccess";

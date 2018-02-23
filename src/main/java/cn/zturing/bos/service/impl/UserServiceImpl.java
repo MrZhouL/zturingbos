@@ -46,15 +46,7 @@ public class UserServiceImpl extends BaserService implements UserService{
 
     @Override
     public PageResponseBean pageQuery(PageRequestBean pageRequestBean) {
-        PageResponseBean resoule = new PageResponseBean();
-
-        List<BcStandardEntity> list = userDao.pageQuery(pageRequestBean.getDetachedCriteria(), pageRequestBean.getFirstResult(), pageRequestBean.getRow());
-        long totalCount = userDao.findTotalCount(pageRequestBean.getDetachedCriteria());
-
-        resoule.setRows(list);
-        resoule.setTotal(totalCount);
-
-        return resoule;
+        return genericPageQueryImpl(pageRequestBean,userDao);
     }
 
 

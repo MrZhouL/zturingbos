@@ -64,7 +64,7 @@ public interface GenericDao<T> {
      * @param maxResults    显示多少条记录
      * @return
      */
-    List<BcStandardEntity> pageQuery(DetachedCriteria detachedCriteria,int firstResult,int maxResults);
+    List<T> pageQuery(DetachedCriteria detachedCriteria,int firstResult,int maxResults);
 
     /**
      * 分页查询-查询总记录数

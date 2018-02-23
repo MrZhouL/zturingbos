@@ -34,4 +34,8 @@
             <one-to-many not-found="ignore" class="cn.zturing.bos.domain.BcStaffEntity"/>
         </set>
     </class>
+
+    <query name="Standard.allStandardUse">
+        <![CDATA[ from BcStandardEntity where deltag='0']]>
+    </query>
 </hibernate-mapping>

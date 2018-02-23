@@ -1,9 +1,13 @@
 package cn.zturing.bos.action.base;
 
+import cn.zturing.bos.service.RegionService;
+import cn.zturing.bos.service.StaffService;
 import cn.zturing.bos.service.StandardService;
 import cn.zturing.bos.service.UserService;
+import cn.zturing.bos.utils.PageRequestBean;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,11 +24,25 @@ public abstract class BaseAction extends ActionSupport{
         this.userService = userService;
     }
 
-    //标准管理service
+    //取派标准管理service
     protected StandardService standardService;
 
     public void setStandardService(StandardService standardService) {
         this.standardService = standardService;
+    }
+
+    //取派员管理service
+    protected StaffService staffService;
+
+    public void setStaffService(StaffService staffService) {
+        this.staffService = staffService;
+    }
+
+    //区域设置service
+    protected RegionService regionService;
+
+    public void setRegionService(RegionService regionService) {
+        this.regionService = regionService;
     }
 
     // 简化 Web对象获取
@@ -46,4 +64,14 @@ public abstract class BaseAction extends ActionSupport{
     public void setRows(int rows) {
         this.rows = rows;
     }
+
+    public PageRequestBean initPageRequestBean(DetachedCriteria criteria){
+        PageRequestBean requestBean = new PageRequestBean();
+
+        requestBean.setPage(page);
+        requestBean.setRow(rows);
+        requestBean.setDetachedCriteria(criteria);
+        return requestBean;
+    }
+
 }
